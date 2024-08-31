@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Text Overlay</title>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  position: relative;
+  width: 80%; /* Adjust as needed */
+  height: auto;
+}
+
+#image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 24px; /* Adjust font size as needed */
+  text-align: center;
+  white-space: nowrap; /* Prevent text from wrapping */
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 10px;
+  border-radius: 5px; /* Rounded corners for the text box */
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+</style>
+</head>
+<body>
+<div class="image-container">
+    <img src="kk.jpg" alt="Descriptive Alt Text" id="image">
+    <div class="text-overlay" id="textOverlay" contenteditable="true">Click to Add Text</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var textOverlay = document.getElementById('textOverlay');
+
+  // If you want to set some default text
+  textOverlay.textContent = 'Default Text';
+
+  // If you want to save the text when the user leaves the input area
+  textOverlay.addEventListener('blur', function() {
+    // Save the text to local storage or a database
+    localStorage.setItem('imageText', textOverlay.textContent);
+  });
+
+  // If you want to load saved text when the page loads
+  var savedText = localStorage.getItem('imageText');
+  if (savedText) {
+    textOverlay.textContent = savedText;
+  }
+});
+</script>
+</body>
+</html>
